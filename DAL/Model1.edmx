@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YaelAndEstiProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GroupRegistrations">
+          <Key>
+            <PropertyRef Name="GroupRegistrationID" />
+          </Key>
+          <Property Name="GroupRegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status_user" Type="nvarchar" MaxLength="15" />
+          <Property Name="IDgroup" Type="int" />
+          <Property Name="IDuser" Type="int" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="groupID" />
+          </Key>
+          <Property Name="groupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openingDate" Type="date" />
+          <Property Name="destDate" Type="date" />
+          <Property Name="dayInTheWeek" Type="nvarchar" MaxLength="10" />
+          <Property Name="AmountWeekly" Type="money" />
+          <Property Name="AmountEnd" Type="money" />
+          <Property Name="IDGroupType" Type="int" />
+        </EntityType>
+        <EntityType Name="GroupTypes">
+          <Key>
+            <PropertyRef Name="GroupTypeID" />
+          </Key>
+          <Property Name="GroupTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="height" Type="float" />
+          <Property Name="userName" Type="nvarchar" MaxLength="30" />
+          <Property Name="DateOfRegistration" Type="date" />
+          <Property Name="tz" Type="nvarchar" MaxLength="9" />
+          <Property Name="email" Type="nvarchar" MaxLength="29" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="gende" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="weightings">
+          <Key>
+            <PropertyRef Name="weightingID" />
+          </Key>
+          <Property Name="weightingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="weightingDate" Type="date" />
+          <Property Name="weightUser" Type="float" />
+          <Property Name="UrlFile" Type="nvarchar" MaxLength="35" />
+          <Property Name="IDuser" Type="int" />
+        </EntityType>
+        <Association Name="FK__GroupRegi__IDgro__47DBAE45">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="GroupRegistrations" Type="Self.GroupRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="groupID" />
+            </Principal>
+            <Dependent Role="GroupRegistrations">
+              <PropertyRef Name="IDgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRegi__IDuse__48CFD27E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="GroupRegistrations" Type="Self.GroupRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="GroupRegistrations">
+              <PropertyRef Name="IDuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups_tb__IDGro__44FF419A">
+          <End Role="GroupTypes" Type="Self.GroupTypes" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupTypes">
+              <PropertyRef Name="GroupTypeID" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="IDGroupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__weighting__IDuse__5165187F">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="weightings" Type="Self.weightings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="weightings">
+              <PropertyRef Name="IDuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YaelAndEstiProjectModelStoreContainer">
+          <EntitySet Name="GroupRegistrations" EntityType="Self.GroupRegistrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupTypes" EntityType="Self.GroupTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="weightings" EntityType="Self.weightings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__GroupRegi__IDgro__47DBAE45" Association="Self.FK__GroupRegi__IDgro__47DBAE45">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupRegistrations" EntitySet="GroupRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRegi__IDuse__48CFD27E" Association="Self.FK__GroupRegi__IDuse__48CFD27E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GroupRegistrations" EntitySet="GroupRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups_tb__IDGro__44FF419A" Association="Self.FK__Groups_tb__IDGro__44FF419A">
+            <End Role="GroupTypes" EntitySet="GroupTypes" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__weighting__IDuse__5165187F" Association="Self.FK__weighting__IDuse__5165187F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="weightings" EntitySet="weightings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YaelAndEstiProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="YaelAndEstiProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GroupRegistrations" EntityType="YaelAndEstiProjectModel.GroupRegistration" />
+          <EntitySet Name="Groups" EntityType="YaelAndEstiProjectModel.Group" />
+          <EntitySet Name="GroupTypes" EntityType="YaelAndEstiProjectModel.GroupType" />
+          <EntitySet Name="Users" EntityType="YaelAndEstiProjectModel.User" />
+          <EntitySet Name="weightings" EntityType="YaelAndEstiProjectModel.weighting" />
+          <AssociationSet Name="FK__GroupRegi__IDgro__47DBAE45" Association="YaelAndEstiProjectModel.FK__GroupRegi__IDgro__47DBAE45">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="GroupRegistration" EntitySet="GroupRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupRegi__IDuse__48CFD27E" Association="YaelAndEstiProjectModel.FK__GroupRegi__IDuse__48CFD27E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GroupRegistration" EntitySet="GroupRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups_tb__IDGro__44FF419A" Association="YaelAndEstiProjectModel.FK__Groups_tb__IDGro__44FF419A">
+            <End Role="GroupType" EntitySet="GroupTypes" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__weighting__IDuse__5165187F" Association="YaelAndEstiProjectModel.FK__weighting__IDuse__5165187F">
+            <End Role="User" EntitySet="Users" />
+            <End Role="weighting" EntitySet="weightings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GroupRegistration">
+          <Key>
+            <PropertyRef Name="GroupRegistrationID" />
+          </Key>
+          <Property Name="GroupRegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status_user" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="IDgroup" Type="Int32" />
+          <Property Name="IDuser" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="YaelAndEstiProjectModel.FK__GroupRegi__IDgro__47DBAE45" FromRole="GroupRegistration" ToRole="Group" />
+          <NavigationProperty Name="User" Relationship="YaelAndEstiProjectModel.FK__GroupRegi__IDuse__48CFD27E" FromRole="GroupRegistration" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="groupID" />
+          </Key>
+          <Property Name="groupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openingDate" Type="DateTime" Precision="0" />
+          <Property Name="destDate" Type="DateTime" Precision="0" />
+          <Property Name="dayInTheWeek" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AmountWeekly" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountEnd" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IDGroupType" Type="Int32" />
+          <NavigationProperty Name="GroupRegistrations" Relationship="YaelAndEstiProjectModel.FK__GroupRegi__IDgro__47DBAE45" FromRole="Group" ToRole="GroupRegistration" />
+          <NavigationProperty Name="GroupType" Relationship="YaelAndEstiProjectModel.FK__Groups_tb__IDGro__44FF419A" FromRole="Group" ToRole="GroupType" />
+        </EntityType>
+        <EntityType Name="GroupType">
+          <Key>
+            <PropertyRef Name="GroupTypeID" />
+          </Key>
+          <Property Name="GroupTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Groups" Relationship="YaelAndEstiProjectModel.FK__Groups_tb__IDGro__44FF419A" FromRole="GroupType" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="height" Type="Double" />
+          <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfRegistration" Type="DateTime" Precision="0" />
+          <Property Name="tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="29" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="gende" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="GroupRegistrations" Relationship="YaelAndEstiProjectModel.FK__GroupRegi__IDuse__48CFD27E" FromRole="User" ToRole="GroupRegistration" />
+          <NavigationProperty Name="weightings" Relationship="YaelAndEstiProjectModel.FK__weighting__IDuse__5165187F" FromRole="User" ToRole="weighting" />
+        </EntityType>
+        <EntityType Name="weighting">
+          <Key>
+            <PropertyRef Name="weightingID" />
+          </Key>
+          <Property Name="weightingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="weightingDate" Type="DateTime" Precision="0" />
+          <Property Name="weightUser" Type="Double" />
+          <Property Name="UrlFile" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="IDuser" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="YaelAndEstiProjectModel.FK__weighting__IDuse__5165187F" FromRole="weighting" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__GroupRegi__IDgro__47DBAE45">
+          <End Type="YaelAndEstiProjectModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="YaelAndEstiProjectModel.GroupRegistration" Role="GroupRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="groupID" />
+            </Principal>
+            <Dependent Role="GroupRegistration">
+              <PropertyRef Name="IDgroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupRegi__IDuse__48CFD27E">
+          <End Type="YaelAndEstiProjectModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="YaelAndEstiProjectModel.GroupRegistration" Role="GroupRegistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="GroupRegistration">
+              <PropertyRef Name="IDuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups_tb__IDGro__44FF419A">
+          <End Type="YaelAndEstiProjectModel.GroupType" Role="GroupType" Multiplicity="0..1" />
+          <End Type="YaelAndEstiProjectModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupType">
+              <PropertyRef Name="GroupTypeID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="IDGroupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__weighting__IDuse__5165187F">
+          <End Type="YaelAndEstiProjectModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="YaelAndEstiProjectModel.weighting" Role="weighting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="weighting">
+              <PropertyRef Name="IDuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YaelAndEstiProjectModelStoreContainer" CdmEntityContainer="YaelAndEstiProjectEntities">
+          <EntitySetMapping Name="GroupRegistrations">
+            <EntityTypeMapping TypeName="YaelAndEstiProjectModel.GroupRegistration">
+              <MappingFragment StoreEntitySet="GroupRegistrations">
+                <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="IDgroup" ColumnName="IDgroup" />
+                <ScalarProperty Name="Status_user" ColumnName="Status_user" />
+                <ScalarProperty Name="GroupRegistrationID" ColumnName="GroupRegistrationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="YaelAndEstiProjectModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="IDGroupType" ColumnName="IDGroupType" />
+                <ScalarProperty Name="AmountEnd" ColumnName="AmountEnd" />
+                <ScalarProperty Name="AmountWeekly" ColumnName="AmountWeekly" />
+                <ScalarProperty Name="dayInTheWeek" ColumnName="dayInTheWeek" />
+                <ScalarProperty Name="destDate" ColumnName="destDate" />
+                <ScalarProperty Name="openingDate" ColumnName="openingDate" />
+                <ScalarProperty Name="groupID" ColumnName="groupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupTypes">
+            <EntityTypeMapping TypeName="YaelAndEstiProjectModel.GroupType">
+              <MappingFragment StoreEntitySet="GroupTypes">
+                <ScalarProperty Name="GroupTypeID" ColumnName="GroupTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="YaelAndEstiProjectModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="gende" ColumnName="gende" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tz" ColumnName="tz" />
+                <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="weightings">
+            <EntityTypeMapping TypeName="YaelAndEstiProjectModel.weighting">
+              <MappingFragment StoreEntitySet="weightings">
+                <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="UrlFile" ColumnName="UrlFile" />
+                <ScalarProperty Name="weightUser" ColumnName="weightUser" />
+                <ScalarProperty Name="weightingDate" ColumnName="weightingDate" />
+                <ScalarProperty Name="weightingID" ColumnName="weightingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

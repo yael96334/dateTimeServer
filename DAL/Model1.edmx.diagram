@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41a82e1eae5c4bd88ff29874eb4754d2" Name="Diagram1">
+        <EntityTypeShape EntityType="YaelAndEstiProjectModel.GroupRegistration" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="YaelAndEstiProjectModel.Group" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="YaelAndEstiProjectModel.GroupType" Width="1.5" PointX="1.5" PointY="10.875" />
+        <EntityTypeShape EntityType="YaelAndEstiProjectModel.User" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="YaelAndEstiProjectModel.weighting" Width="1.5" PointX="3" PointY="5.5" />
+        <AssociationConnector Association="YaelAndEstiProjectModel.FK__GroupRegi__IDgro__47DBAE45" />
+        <AssociationConnector Association="YaelAndEstiProjectModel.FK__GroupRegi__IDuse__48CFD27E" />
+        <AssociationConnector Association="YaelAndEstiProjectModel.FK__Groups_tb__IDGro__44FF419A" />
+        <AssociationConnector Association="YaelAndEstiProjectModel.FK__weighting__IDuse__5165187F" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
